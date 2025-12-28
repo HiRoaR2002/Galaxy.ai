@@ -257,13 +257,22 @@ const LLMNode = ({ id, data, selected }: NodeProps<LLMNodeData>) => {
 
         {/* Output */}
         {data.output && (
-          <div className="p-3 bg-white/60 border border-[#e8e0d0] rounded-lg">
-            <div className="flex items-center gap-2 mb-2">
-              <Sparkles size={14} className="text-[#7c3aed]" />
-              <div className="text-xs font-semibold text-gray-600">Output</div>
+          <div className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-white to-[#fdfbf7] p-4 shadow-sm ring-1 ring-[#e8e0d0] transition-all duration-300 hover:shadow-md">
+            <div className="mb-3 flex items-center justify-between border-b border-[#f0ebe0] pb-2">
+              <div className="flex items-center gap-2">
+                <div className="flex h-6 w-6 items-center justify-center rounded-md bg-[#7c3aed]/10 text-[#7c3aed]">
+                  <Sparkles size={14} />
+                </div>
+                <span className="text-xs font-bold uppercase tracking-wider text-[#7c3aed]">
+                  Generated Response
+                </span>
+              </div>
             </div>
-            <div className="text-xs text-gray-700 whitespace-pre-wrap max-h-[150px] overflow-y-auto leading-relaxed">
-              {data.output}
+            
+            <div className="relative">
+              <div className="light-scrollbar max-h-[200px] overflow-y-auto pr-2 text-[13px] leading-relaxed text-slate-700">
+                {data.output}
+              </div>
             </div>
           </div>
         )}

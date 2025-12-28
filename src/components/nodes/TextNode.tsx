@@ -110,10 +110,11 @@ const TextNode = ({ id, data, selected }: NodeProps<TextNodeData>) => {
             bg-transparent
             border-none
             focus:outline-none focus:ring-0
-            text-gray-700
-            placeholder-gray-400
+            text-slate-700
+            placeholder-slate-400
             resize-none
             leading-relaxed
+            light-scrollbar
           "
         />
       </div>

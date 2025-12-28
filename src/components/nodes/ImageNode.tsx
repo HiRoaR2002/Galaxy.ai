@@ -133,7 +133,7 @@ const ImageNode = ({ id, data, selected }: NodeProps<ImageNodeData>) => {
             <img
               src={data.imageData}
               alt={data.fileName || 'Uploaded image'}
-              className="w-full h-auto max-h-[160px] object-contain rounded-lg border border-[#e8e0d0] bg-white"
+              className="w-full h-auto max-h-[160px] object-contain rounded-lg ring-1 ring-[#e8e0d0] shadow-sm bg-white transition-shadow hover:shadow-md"
             />
             <button
               onClick={handleRemoveImage}

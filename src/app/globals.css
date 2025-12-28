@@ -86,7 +86,7 @@ body {
   border-radius: 8px !important;
 }
 
-/* Custom Scrollbar */
+/* Global Dark Scrollbar (Default) */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -103,6 +103,24 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #5a5a5e;
+}
+
+/* Light Scrollbar for internal light cards */
+.light-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.light-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.light-scrollbar::-webkit-scrollbar-thumb {
+  background: #cbd5e1; /* slate-300 */
+  border-radius: 2px;
+}
+
+.light-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8; /* slate-400 */
 }
 
 /* Node animations */

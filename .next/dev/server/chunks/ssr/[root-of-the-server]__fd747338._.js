@@ -645,7 +645,7 @@ const TextNode = ({ id, data, selected })=>{
                     value: data.text || '',
                     onChange: handleTextChange,
                     placeholder: "Enter text content...",
-                    className: "   w-full min-h-[100px] max-h-[200px]   p-0 text-sm   bg-transparent   border-none   focus:outline-none focus:ring-0   text-gray-700   placeholder-gray-400   resize-none   leading-relaxed   "
+                    className: "   w-full min-h-[100px] max-h-[200px]   p-0 text-sm   bg-transparent   border-none   focus:outline-none focus:ring-0   text-slate-700   placeholder-slate-400   resize-none   leading-relaxed   light-scrollbar   "
                 }, void 0, false, {
                     fileName: "[project]/src/components/nodes/TextNode.tsx",
                     lineNumber: 103,
@@ -663,7 +663,7 @@ const TextNode = ({ id, data, selected })=>{
                 className: "!w-3 !h-3 !bg-[#7c3aed] !border-2 !border-[#1a1a1e]"
             }, void 0, false, {
                 fileName: "[project]/src/components/nodes/TextNode.tsx",
-                lineNumber: 122,
+                lineNumber: 123,
                 columnNumber: 7
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$reactflow$2f$core$2f$dist$2f$esm$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Handle"], {
@@ -673,7 +673,7 @@ const TextNode = ({ id, data, selected })=>{
                 className: "!w-3 !h-3 !bg-[#7c3aed] !border-2 !border-[#1a1a1e]"
             }, void 0, false, {
                 fileName: "[project]/src/components/nodes/TextNode.tsx",
-                lineNumber: 128,
+                lineNumber: 129,
                 columnNumber: 7
             }, ("TURBOPACK compile-time value", void 0))
         ]
@@ -878,7 +878,7 @@ const ImageNode = ({ id, data, selected })=>{
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
                                 src: data.imageData,
                                 alt: data.fileName || 'Uploaded image',
-                                className: "w-full h-auto max-h-[160px] object-contain rounded-lg border border-[#e8e0d0] bg-white"
+                                className: "w-full h-auto max-h-[160px] object-contain rounded-lg ring-1 ring-[#e8e0d0] shadow-sm bg-white transition-shadow hover:shadow-md"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/nodes/ImageNode.tsx",
                                 lineNumber: 133,
@@ -1354,39 +1354,59 @@ const LLMNode = ({ id, data, selected })=>{
                         columnNumber: 11
                     }, ("TURBOPACK compile-time value", void 0)),
                     data.output && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "p-3 bg-white/60 border border-[#e8e0d0] rounded-lg",
+                        className: "group relative overflow-hidden rounded-xl bg-gradient-to-br from-white to-[#fdfbf7] p-4 shadow-sm ring-1 ring-[#e8e0d0] transition-all duration-300 hover:shadow-md",
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "flex items-center gap-2 mb-2",
-                                children: [
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$sparkles$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Sparkles$3e$__["Sparkles"], {
-                                        size: 14,
-                                        className: "text-[#7c3aed]"
-                                    }, void 0, false, {
-                                        fileName: "[project]/src/components/nodes/LLMNode.tsx",
-                                        lineNumber: 262,
-                                        columnNumber: 15
-                                    }, ("TURBOPACK compile-time value", void 0)),
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                        className: "text-xs font-semibold text-gray-600",
-                                        children: "Output"
-                                    }, void 0, false, {
-                                        fileName: "[project]/src/components/nodes/LLMNode.tsx",
-                                        lineNumber: 263,
-                                        columnNumber: 15
-                                    }, ("TURBOPACK compile-time value", void 0))
-                                ]
-                            }, void 0, true, {
+                                className: "mb-3 flex items-center justify-between border-b border-[#f0ebe0] pb-2",
+                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    className: "flex items-center gap-2",
+                                    children: [
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                            className: "flex h-6 w-6 items-center justify-center rounded-md bg-[#7c3aed]/10 text-[#7c3aed]",
+                                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$sparkles$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Sparkles$3e$__["Sparkles"], {
+                                                size: 14
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/components/nodes/LLMNode.tsx",
+                                                lineNumber: 264,
+                                                columnNumber: 19
+                                            }, ("TURBOPACK compile-time value", void 0))
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/components/nodes/LLMNode.tsx",
+                                            lineNumber: 263,
+                                            columnNumber: 17
+                                        }, ("TURBOPACK compile-time value", void 0)),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                            className: "text-xs font-bold uppercase tracking-wider text-[#7c3aed]",
+                                            children: "Generated Response"
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/components/nodes/LLMNode.tsx",
+                                            lineNumber: 266,
+                                            columnNumber: 17
+                                        }, ("TURBOPACK compile-time value", void 0))
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "[project]/src/components/nodes/LLMNode.tsx",
+                                    lineNumber: 262,
+                                    columnNumber: 15
+                                }, ("TURBOPACK compile-time value", void 0))
+                            }, void 0, false, {
                                 fileName: "[project]/src/components/nodes/LLMNode.tsx",
                                 lineNumber: 261,
                                 columnNumber: 13
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "text-xs text-gray-700 whitespace-pre-wrap max-h-[150px] overflow-y-auto leading-relaxed",
-                                children: data.output
+                                className: "relative",
+                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    className: "light-scrollbar max-h-[200px] overflow-y-auto pr-2 text-[13px] leading-relaxed text-slate-700",
+                                    children: data.output
+                                }, void 0, false, {
+                                    fileName: "[project]/src/components/nodes/LLMNode.tsx",
+                                    lineNumber: 273,
+                                    columnNumber: 15
+                                }, ("TURBOPACK compile-time value", void 0))
                             }, void 0, false, {
                                 fileName: "[project]/src/components/nodes/LLMNode.tsx",
-                                lineNumber: 265,
+                                lineNumber: 272,
                                 columnNumber: 13
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
@@ -1411,7 +1431,7 @@ const LLMNode = ({ id, data, selected })=>{
                 className: "!w-3 !h-3 !bg-[#7c3aed] !border-2 !border-[#1a1a1e]"
             }, void 0, false, {
                 fileName: "[project]/src/components/nodes/LLMNode.tsx",
-                lineNumber: 273,
+                lineNumber: 282,
                 columnNumber: 7
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$reactflow$2f$core$2f$dist$2f$esm$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Handle"], {
@@ -1424,7 +1444,7 @@ const LLMNode = ({ id, data, selected })=>{
                 className: "!w-3 !h-3 !bg-[#7c3aed] !border-2 !border-[#1a1a1e]"
             }, void 0, false, {
                 fileName: "[project]/src/components/nodes/LLMNode.tsx",
-                lineNumber: 280,
+                lineNumber: 289,
                 columnNumber: 7
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$reactflow$2f$core$2f$dist$2f$esm$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Handle"], {
@@ -1437,7 +1457,7 @@ const LLMNode = ({ id, data, selected })=>{
                 className: "!w-3 !h-3 !bg-[#7c3aed] !border-2 !border-[#1a1a1e]"
             }, void 0, false, {
                 fileName: "[project]/src/components/nodes/LLMNode.tsx",
-                lineNumber: 287,
+                lineNumber: 296,
                 columnNumber: 7
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$reactflow$2f$core$2f$dist$2f$esm$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Handle"], {
@@ -1447,7 +1467,7 @@ const LLMNode = ({ id, data, selected })=>{
                 className: "!w-3 !h-3 !bg-[#7c3aed] !border-2 !border-[#1a1a1e]"
             }, void 0, false, {
                 fileName: "[project]/src/components/nodes/LLMNode.tsx",
-                lineNumber: 294,
+                lineNumber: 303,
                 columnNumber: 7
             }, ("TURBOPACK compile-time value", void 0))
         ]
