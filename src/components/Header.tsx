@@ -1,6 +1,6 @@
 'use client';
 import React, { useState } from 'react';
-import { Save, FolderOpen, Undo, Redo } from 'lucide-react';
+import { Save, FolderOpen, Trash2 } from 'lucide-react';
 import useStore from '@/store/useStore';
 
 interface HeaderProps {
@@ -9,7 +9,7 @@ interface HeaderProps {
 
 const Header = ({ title = 'untitled' }: HeaderProps) => {
   const [workflowTitle, setWorkflowTitle] = useState(title);
-  const { nodes, edges, loadWorkflow, undo, redo } = useStore();
+  const { nodes, edges, loadWorkflow, clearCanvas } = useStore();
 
   const handleSave = () => {
     const flow = { nodes, edges };
@@ -17,7 +17,7 @@ const Header = ({ title = 'untitled' }: HeaderProps) => {
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = `${workflowTitle || 'workflow'}-${Date.now()}.json`;
+    link.download = `${workflowTitle || 'workflow'}.json`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -46,66 +46,62 @@ const Header = ({ title = 'untitled' }: HeaderProps) => {
   };
 
   return (
-    <header className="h-14 bg-[#1a1a1e] border-b border-[#2a2a2e] flex items-center justify-between px-4 z-20">
-      {/* Left Section - Logo & Title */}
-      <div className="flex items-center gap-4">
-        {/* Logo */}
-        <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-pink-500 to-purple-600 flex items-center justify-center">
-          <span className="text-white font-bold text-lg">W</span>
-        </div>
-        
-        {/* Workflow Title */}
-        <div className="flex items-center gap-2 px-3 py-1.5 bg-[#2a2a2e] rounded-lg">
-          <input
-            type="text"
-            value={workflowTitle}
-            onChange={(e) => setWorkflowTitle(e.target.value)}
-            className="bg-transparent text-sm text-gray-300 outline-none w-32 min-w-0"
-            placeholder="untitled"
-          />
-        </div>
-      </div>
-
-      {/* Right Section - Actions */}
-      <div className="flex items-center gap-2">
-        {/* Undo/Redo */}
-        <div className="flex items-center bg-[#2a2a2e] rounded-lg p-0.5 mr-2">
-          <button 
-            onClick={undo}
-            className="p-1.5 text-gray-400 hover:text-gray-200 hover:bg-[#3a3a3e] rounded-md transition-colors"
-            title="Undo"
-          >
-            <Undo size={16} />
-          </button>
-          <button 
-            onClick={redo}
-            className="p-1.5 text-gray-400 hover:text-gray-200 hover:bg-[#3a3a3e] rounded-md transition-colors"
-            title="Redo"
-          >
-            <Redo size={16} />
-          </button>
+    <header className="absolute top-0 inset-x-0 w-full z-50 pointer-events-none">
+      <div className="flex items-start justify-between p-2 ">
+        {/* Left Section - Floating Rename Input */}
+        <div className="pointer-events-auto">
+          <div className="bg-[#2a2a2e] backdrop-blur-xl rounded-2xl p-1 border border-white/5 shadow-lg shadow-black/20">
+            <input
+              type="text"
+              value={workflowTitle}
+              onChange={(e) => setWorkflowTitle(e.target.value)}
+              className="text-white font-medium text-sm 
+                w-48 px-4 py-2 
+                rounded-xl
+                bg-transparent
+                hover:bg-white/5 
+                focus:bg-[#3a3a3e] focus:outline-none focus:ring-1 focus:ring-[#7c3aed]/50
+                transition-all duration-200
+                placeholder:text-gray-500 placeholder:font-normal
+              "
+              placeholder="Workflow Name"
+            />
+          </div>
         </div>
 
-        {/* Load Button */}
-        <label className="flex items-center gap-2 px-3 py-1.5 text-sm text-gray-400 hover:text-gray-200 transition-colors cursor-pointer hover:bg-[#2a2a2e] rounded-lg">
-          <FolderOpen size={16} />
-          <span className="hidden sm:inline">Load</span>
-          <input 
-            type="file" 
-            className="hidden" 
-            accept=".json" 
-            onChange={handleLoad} 
-          />
-        </label>
+        {/* Right Section - Floating Control Icons */}
+        <div className="pointer-events-auto">
+          <div className="flex items-center gap-2 bg-[#2a2a2e] backdrop-blur-xl rounded-2xl p-2 border border-white/5 shadow-lg shadow-black/20">
+            {/* Clear Canvas Button */}
+            <button
+               onClick={clearCanvas}
+               className="flex items-center justify-center p-2.5 bg-[#1a1a1e]/80 rounded-xl text-red-400 hover:bg-red-500/10 hover:text-red-300 transition-all cursor-pointer active:scale-95 group"
+               title="Clear Canvas"
+            >
+               <Trash2 size={18} />
+            </button>
 
-        {/* Save Button */}
-        <button 
-          onClick={handleSave}
-          className="flex items-center gap-2 px-3 py-1.5 text-sm text-gray-400 hover:text-gray-200 transition-colors hover:bg-[#2a2a2e] rounded-lg"
-        >
-          <Save size={16} />
-          <span className="hidden sm:inline">Save</span>
-        </button>
+            {/* Load Button */}
+            <label className="flex items-center justify-center p-2.5 bg-[#1a1a1e]/80 rounded-xl text-white hover:bg-white/10 transition-all cursor-pointer hover:text-gray-200">
+              <FolderOpen size={18} />
+              <input 
+                type="file" 
+                className="hidden" 
+                accept=".json" 
+                onChange={handleLoad} 
+              />
+            </label>
+
+            {/* Save Button */}
+            <button 
+              onClick={handleSave}
+              className="flex items-center justify-center p-2.5 bg-[#1a1a1e]/80 rounded-xl text-white hover:bg-white/10 transition-all cursor-pointer active:scale-95 hover:text-gray-200"
+              title="Save Workflow"
+            >
+              <Save size={18} />
+            </button>
+          </div>
+        </div>
       </div>
     </header>
   );

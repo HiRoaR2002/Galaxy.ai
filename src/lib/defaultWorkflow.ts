@@ -33,22 +33,22 @@ export const defaultNodes: AppNode[] = [
 ];
 
 export const defaultEdges: Edge[] = [
-  { id: 'e1', source: 'img1', target: 'analyze', targetHandle: 'images', animated: true, type: 'smoothstep', style: edgeStyle },
-  { id: 'e2', source: 'img2', target: 'analyze', targetHandle: 'images', animated: true, type: 'smoothstep', style: edgeStyle },
-  { id: 'e3', source: 'img3', target: 'analyze', targetHandle: 'images', animated: true, type: 'smoothstep', style: edgeStyle },
+  { id: 'e1', source: 'img1', target: 'analyze', targetHandle: 'images', animated: true, type: 'customEdge', style: edgeStyle },
+  { id: 'e2', source: 'img2', target: 'analyze', targetHandle: 'images', animated: true, type: 'customEdge', style: edgeStyle },
+  { id: 'e3', source: 'img3', target: 'analyze', targetHandle: 'images', animated: true, type: 'customEdge', style: edgeStyle },
   
-  { id: 'e4', source: 'sys', target: 'analyze', targetHandle: 'system', animated: true, type: 'smoothstep', style: edgeStyle },
-  { id: 'e5', source: 'prod', target: 'analyze', targetHandle: 'user', animated: true, type: 'smoothstep', style: edgeStyle },
+  { id: 'e4', source: 'sys', target: 'analyze', targetHandle: 'system', animated: true, type: 'customEdge', style: edgeStyle },
+  { id: 'e5', source: 'prod', target: 'analyze', targetHandle: 'user', animated: true, type: 'customEdge', style: edgeStyle },
   
-  { id: 'e_inst1', source: 'inst1', target: 'amazon', targetHandle: 'system', animated: true, type: 'smoothstep', style: edgeStyle },
-  { id: 'e_inst2', source: 'inst2', target: 'insta', targetHandle: 'system', animated: true, type: 'smoothstep', style: edgeStyle },
-  { id: 'e_inst3', source: 'inst3', target: 'seo', targetHandle: 'system', animated: true, type: 'smoothstep', style: edgeStyle },
+  { id: 'e_inst1', source: 'inst1', target: 'amazon', targetHandle: 'system', animated: true, type: 'customEdge', style: edgeStyle },
+  { id: 'e_inst2', source: 'inst2', target: 'insta', targetHandle: 'system', animated: true, type: 'customEdge', style: edgeStyle },
+  { id: 'e_inst3', source: 'inst3', target: 'seo', targetHandle: 'system', animated: true, type: 'customEdge', style: edgeStyle },
   
-  { id: 'e6', source: 'analyze', target: 'amazon', targetHandle: 'user', animated: true, type: 'smoothstep', style: edgeStyle },
-  { id: 'e7', source: 'analyze', target: 'insta', targetHandle: 'user', animated: true, type: 'smoothstep', style: edgeStyle },
-  { id: 'e8', source: 'analyze', target: 'seo', targetHandle: 'user', animated: true, type: 'smoothstep', style: edgeStyle },
+  { id: 'e6', source: 'analyze', target: 'amazon', targetHandle: 'user', animated: true, type: 'customEdge', style: edgeStyle },
+  { id: 'e7', source: 'analyze', target: 'insta', targetHandle: 'user', animated: true, type: 'customEdge', style: edgeStyle },
+  { id: 'e8', source: 'analyze', target: 'seo', targetHandle: 'user', animated: true, type: 'customEdge', style: edgeStyle },
   
-  { id: 'e9', source: 'amazon', target: 'out1', targetHandle: 'target', animated: true, type: 'smoothstep', style: edgeStyle },
-  { id: 'e10', source: 'insta', target: 'out2', targetHandle: 'target', animated: true, type: 'smoothstep', style: edgeStyle },
-  { id: 'e11', source: 'seo', target: 'out3', targetHandle: 'target', animated: true, type: 'smoothstep', style: edgeStyle },
+  { id: 'e9', source: 'amazon', target: 'out1', targetHandle: 'target', animated: true, type: 'customEdge', style: edgeStyle },
+  { id: 'e10', source: 'insta', target: 'out2', targetHandle: 'target', animated: true, type: 'customEdge', style: edgeStyle },
+  { id: 'e11', source: 'seo', target: 'out3', targetHandle: 'target', animated: true, type: 'customEdge', style: edgeStyle },
 ];

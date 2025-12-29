@@ -1,7 +1,7 @@
 'use client';
 import { memo, useCallback, useState, useRef, useEffect } from 'react';
 import { Handle, Position, NodeProps, useReactFlow } from 'reactflow';
-import { MoreHorizontal, Play, Loader2, AlertCircle, Sparkles, ChevronDown, Copy, Trash2 } from 'lucide-react';
+import { MoreHorizontal, Play, Loader2, AlertCircle, Sparkles, ChevronDown, Copy, Trash2, BrainCircuit } from 'lucide-react';
 import useStore from '@/store/useStore';
 import { LLMNodeData, GeminiModel, TextNodeData, ImageNodeData } from '@/types/workflow';
 
@@ -130,152 +130,158 @@ const LLMNode = ({ id, data, selected }: NodeProps<LLMNodeData>) => {
   return (
     <div
       className={`
-        min-w-[280px] max-w-[340px] 
-        bg-[#f5f0e6] 
-        rounded-xl shadow-lg
+        relative
+        min-w-[320px] max-w-[400px] 
+        bg-[#1e1e24] 
+        rounded-2xl shadow-2xl
         border transition-all duration-200
         ${selected 
-          ? 'border-[#7c3aed] shadow-[#7c3aed]/20 shadow-xl' 
-          : 'border-[#e8e0d0] hover:border-[#7c3aed]/50'
+          ? 'border-[#c084fc] shadow-[#c084fc]/20' 
+          : 'border-[#2a2a2e] hover:border-[#c084fc]/50'
         }
       `}
     >
-      {/* Header */}
-      <div className="px-4 py-3 flex items-center justify-between border-b border-[#e8e0d0] relative">
-        <input
-          type="text"
-          value={data.label || 'LLM Node'}
-          onChange={handleLabelChange}
-          className="text-sm font-medium bg-transparent border-none outline-none text-gray-700 placeholder-gray-400 flex-1"
-          placeholder="LLM Node"
-        />
+      {/* Header - Label */}
+      <div className="flex items-center justify-between pt-5 px-6 pb-3">
+        <div className="flex items-center gap-2 w-[85%]">
+            <input
+            type="text"
+            value={data.label || 'LLM Node'}
+            onChange={handleLabelChange}
+            className="text-base font-semibold bg-transparent border-none outline-none text-white placeholder-gray-500 flex-1"
+            placeholder="LLM Node"
+            />
+        </div>
+        
+        {/* Menu Button */}
         <button 
           onClick={() => setShowMenu(!showMenu)}
-          className="p-1 hover:bg-black/5 rounded transition-colors"
+          className="p-1 rounded-md hover:bg-white/10 transition-colors text-gray-400 hover:text-white"
         >
-          <MoreHorizontal size={16} className="text-gray-500" />
+          <MoreHorizontal size={20} />
         </button>
-
-        {/* Dropdown Menu */}
-        {showMenu && (
-          <div 
-            ref={menuRef}
-            className="absolute top-8 right-2 w-32 bg-white rounded-lg shadow-xl border border-gray-100 z-50 overflow-hidden"
-          >
-            <button
-              onClick={() => {
-                duplicateNode(id);
-                setShowMenu(false);
-              }}
-              className="w-full px-3 py-2 text-sm text-left text-gray-700 hover:bg-gray-50 flex items-center gap-2"
-            >
-              <Copy size={14} />
-              Duplicate
-            </button>
-            <div className="h-px bg-gray-100" />
-            <button
-              onClick={() => {
-                deleteNode(id);
-                setShowMenu(false);
-              }}
-              className="w-full px-3 py-2 text-sm text-left text-red-600 hover:bg-red-50 flex items-center gap-2"
-            >
-              <Trash2 size={14} />
-              Delete
-            </button>
-          </div>
-        )}
       </div>
 
-      {/* Content */}
-      <div className="p-4 space-y-3">
-        {/* Model Selection */}
-        <div className="relative">
+      {/* Dropdown Menu */}
+      {showMenu && (
+        <div 
+          ref={menuRef}
+          className="absolute right-0 top-10 -mr-2 w-56 bg-[#1e1e24] rounded-xl shadow-[0_10px_40px_-10px_rgba(0,0,0,0.5)] border border-[#2a2a2e] z-50 overflow-hidden p-2"
+        >
           <button
-            onClick={() => setShowModelSelect(!showModelSelect)}
-            className="w-full px-3 py-2 text-sm bg-white/60 border border-[#e8e0d0] rounded-lg flex items-center justify-between text-gray-700 hover:bg-white/80 transition-colors"
+            onClick={() => {
+              duplicateNode(id);
+              setShowMenu(false);
+            }}
+             className="w-full px-3 py-2.5 text-sm text-left text-white hover:bg-[#2a2a2e] rounded-md flex items-center justify-between transition-colors group"
           >
-            <span>{models.find(m => m.value === data.model)?.label || 'Select Model'}</span>
-            <ChevronDown size={14} className={`transition-transform ${showModelSelect ? 'rotate-180' : ''}`} />
+            <span>Duplicate</span>
+            <span className="text-gray-500 text-xs italic group-hover:text-gray-400">ctrl+d</span>
           </button>
           
-          {showModelSelect && (
-            <div className="absolute top-full left-0 right-0 mt-1 bg-white rounded-lg border border-[#e8e0d0] shadow-lg z-10 overflow-hidden">
-              {models.map((model) => (
-                <button
-                  key={model.value}
-                  onClick={() => handleModelChange(model.value)}
-                  className={`w-full px-3 py-2 text-sm text-left hover:bg-gray-50 transition-colors ${
-                    data.model === model.value ? 'bg-[#7c3aed]/10 text-[#7c3aed]' : 'text-gray-700'
-                  }`}
-                >
-                  {model.label}
-                </button>
-              ))}
-            </div>
-          )}
+           <div className="h-px bg-[#2a2a2e] my-2" />
+
+          <button
+            onClick={() => {
+              deleteNode(id);
+              setShowMenu(false);
+            }}
+            className="w-full px-3 py-2.5 text-sm text-left text-white hover:bg-[#2a2a2e] rounded-md flex items-center justify-between transition-colors group"
+          >
+            <span>Delete</span>
+            <span className="text-gray-500 text-xs italic group-hover:text-gray-400">del</span>
+          </button>
         </div>
+      )}
 
-        {/* Run Button */}
-        <button
-          onClick={runLLM}
-          disabled={isRunning}
-          className="
-            w-full px-4 py-2.5
-            bg-[#7c3aed]
-            hover:bg-[#6d28d9]
-            text-white font-medium text-sm
-            rounded-lg
-            disabled:opacity-50 disabled:cursor-not-allowed
-            transition-all duration-200
-            flex items-center justify-center gap-2
-            shadow-md hover:shadow-lg
-          "
-        >
-          {isRunning ? (
-            <>
-              <Loader2 size={16} className="animate-spin" />
-              Running...
-            </>
-          ) : (
-            <>
-              <Play size={16} />
-              Run Model
-            </>
-          )}
-        </button>
-
-        {/* Error */}
-        {data.error && (
-          <div className="p-3 bg-red-50 border border-red-200 rounded-lg">
-            <div className="flex items-start gap-2">
-              <AlertCircle size={16} className="text-red-600 mt-0.5 flex-shrink-0" />
-              <div className="text-xs text-red-700">{data.error}</div>
-            </div>
-          </div>
-        )}
-
-        {/* Output */}
-        {data.output && (
-          <div className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-white to-[#fdfbf7] p-4 shadow-sm ring-1 ring-[#e8e0d0] transition-all duration-300 hover:shadow-md">
-            <div className="mb-3 flex items-center justify-between border-b border-[#f0ebe0] pb-2">
-              <div className="flex items-center gap-2">
-                <div className="flex h-6 w-6 items-center justify-center rounded-md bg-[#7c3aed]/10 text-[#7c3aed]">
-                  <Sparkles size={14} />
-                </div>
-                <span className="text-xs font-bold uppercase tracking-wider text-[#7c3aed]">
-                  Generated Response
-                </span>
-              </div>
-            </div>
-            
+      {/* Content */}
+      <div className="px-4 pb-5">
+         <div className="space-y-4">
+            {/* Model Selection */}
             <div className="relative">
-              <div className="light-scrollbar max-h-[200px] overflow-y-auto pr-2 text-[13px] leading-relaxed text-slate-700">
-                {data.output}
-              </div>
+            <button
+                onClick={() => setShowModelSelect(!showModelSelect)}
+                className="w-full px-3 py-2.5 text-sm rounded-lg flex items-center justify-between transition-colors bg-[#2b2b30] border border-[#3a3a3e] text-white hover:bg-[#3a3a3e]"
+            >
+                <div className="flex items-center gap-2">
+                    <Sparkles size={14} className="text-[#c084fc]" />
+                    <span>{models.find(m => m.value === data.model)?.label || 'Select Model'}</span>
+                </div>
+                <ChevronDown size={14} className={`transition-transform text-gray-400 ${showModelSelect ? 'rotate-180' : ''}`} />
+            </button>
+            
+            {showModelSelect && (
+                <div 
+                  className="absolute top-full left-0 right-0 mt-2 rounded-lg shadow-xl z-20 overflow-hidden bg-[#1e1e24] border border-[#2a2a2e]"
+                >
+                {models.map((model) => (
+                    <button
+                    key={model.value}
+                    onClick={() => handleModelChange(model.value)}
+                    className={`
+                      w-full px-3 py-2.5 text-sm text-left transition-colors flex items-center gap-2
+                      ${data.model === model.value ? 'bg-[#2a2a2e] text-[#c084fc]' : 'text-gray-300 hover:bg-[#2a2a2e]'}
+                    `}
+                    >
+                     {data.model === model.value && <div className="w-1 h-4 bg-[#c084fc] rounded-full mr-1"></div>}
+                    {model.label}
+                    </button>
+                ))}
+                </div>
+            )}
             </div>
-          </div>
-        )}
+
+            {/* Run Button */}
+            <button
+            onClick={runLLM}
+            disabled={isRunning}
+            className="
+              w-full py-2.5 rounded-lg font-medium text-sm flex items-center justify-center gap-2 transition-all duration-200
+              bg-[#7c3aed] text-white hover:bg-[#6d28d9]
+              disabled:opacity-70 disabled:cursor-not-allowed
+              shadow-lg shadow-[#7c3aed]/20
+            "
+            >
+            {isRunning ? (
+                <>
+                <Loader2 size={16} className="animate-spin" />
+                Running...
+                </>
+            ) : (
+                <>
+                <Play size={16} fill="white" />
+                Run Model
+                </>
+            )}
+            </button>
+
+             {/* Error Display */}
+            {data.error && (
+            <div className="p-3 bg-red-900/20 border border-red-500/30 rounded-lg">
+                <div className="flex items-start gap-2">
+                <AlertCircle size={16} className="text-red-400 mt-0.5 flex-shrink-0" />
+                <div className="text-xs text-red-200">{data.error}</div>
+                </div>
+            </div>
+            )}
+
+            {/* Output Display */}
+            {data.output && (
+            <div 
+                className="rounded-xl p-4 transition-all duration-300 relative group bg-[#2b2b30] border border-[#3a3a3e]"
+            >
+                <div className="mb-2 flex items-center justify-between border-b border-[#3a3a3e] pb-2">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-[#c084fc]">
+                    Generated Response
+                </span>
+                </div>
+                
+                <div className="light-scrollbar max-h-[250px] overflow-y-auto pr-2 text-sm leading-relaxed text-gray-200">
+                    {data.output}
+                </div>
+            </div>
+            )}
+        </div>
       </div>
 
       {/* Handles */}
@@ -284,27 +290,27 @@ const LLMNode = ({ id, data, selected }: NodeProps<LLMNodeData>) => {
         position={Position.Left}
         id="system"
         style={{ top: '30%' }}
-        className="!w-3 !h-3 !bg-[#7c3aed] !border-2 !border-[#1a1a1e]"
+        className="!w-4 !h-4 !bg-[#1e1e24] !border-[4px] !border-[#e879f9] !rounded-full !-left-2.5 ring-2 ring-[#1e1e24]"
       />
       <Handle
         type="target"
         position={Position.Left}
         id="user"
         style={{ top: '50%' }}
-        className="!w-3 !h-3 !bg-[#7c3aed] !border-2 !border-[#1a1a1e]"
+        className="!w-4 !h-4 !bg-[#1e1e24] !border-[4px] !border-[#e879f9] !rounded-full !-left-2.5 ring-2 ring-[#1e1e24]"
       />
       <Handle
         type="target"
         position={Position.Left}
         id="images"
         style={{ top: '70%' }}
-        className="!w-3 !h-3 !bg-[#7c3aed] !border-2 !border-[#1a1a1e]"
+        className="!w-4 !h-4 !bg-[#1e1e24] !border-[4px] !border-[#e879f9] !rounded-full !-left-2.5 ring-2 ring-[#1e1e24]"
       />
       <Handle
         type="source"
         position={Position.Right}
         id="source"
-        className="!w-3 !h-3 !bg-[#7c3aed] !border-2 !border-[#1a1a1e]"
+        className="!w-4 !h-4 !bg-[#1e1e24] !border-[4px] !border-[#e879f9] !rounded-full !-right-2.5 ring-2 ring-[#1e1e24]"
       />
     </div>
   );

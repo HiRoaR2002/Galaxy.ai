@@ -41,82 +41,96 @@ const TextNode = ({ id, data, selected }: NodeProps<TextNodeData>) => {
   return (
     <div
       className={`
-        min-w-[280px] max-w-[320px] 
-        bg-[#f5f0e6] 
-        rounded-xl shadow-lg
+        relative
+        min-w-[320px] max-w-[400px] 
+        bg-[#1e1e24] 
+        rounded-2xl shadow-2xl
         border transition-all duration-200
         ${selected 
-          ? 'border-[#7c3aed] shadow-[#7c3aed]/20 shadow-xl' 
-          : 'border-[#e8e0d0] hover:border-[#7c3aed]/50'
+          ? 'border-[#c084fc] shadow-[#c084fc]/20' 
+          : 'border-[#2a2a2e] hover:border-[#c084fc]/50'
         }
       `}
     >
-      {/* Header */}
-      <div className="px-4 py-3 flex items-center justify-between relative">
+      {/* Header - Label */}
+      <div className="flex items-center justify-between pt-5 px-6 pb-3">
         <input
           type="text"
           value={data.label || 'Prompt'}
           onChange={handleLabelChange}
-          className="text-sm font-medium bg-transparent border-none outline-none text-gray-700 placeholder-gray-400"
+          className="text-base font-semibold bg-transparent border-none outline-none text-white placeholder-gray-500 w-[85%]"
           placeholder="Prompt"
         />
+        
+        {/* Menu Button */}
         <button 
           onClick={() => setShowMenu(!showMenu)}
-          className="p-1 hover:bg-black/5 rounded transition-colors"
+          className="p-1 rounded-md hover:bg-white/10 transition-colors text-gray-400 hover:text-white"
         >
-          <MoreHorizontal size={16} className="text-gray-500" />
+          <MoreHorizontal size={20} />
         </button>
-
-        {/* Dropdown Menu */}
-        {showMenu && (
-          <div 
-            ref={menuRef}
-            className="absolute top-8 right-2 w-32 bg-white rounded-lg shadow-xl border border-gray-100 z-50 overflow-hidden"
-          >
-            <button
-              onClick={() => {
-                duplicateNode(id);
-                setShowMenu(false);
-              }}
-              className="w-full px-3 py-2 text-sm text-left text-gray-700 hover:bg-gray-50 flex items-center gap-2"
-            >
-              <Copy size={14} />
-              Duplicate
-            </button>
-            <div className="h-px bg-gray-100" />
-            <button
-              onClick={() => {
-                deleteNode(id);
-                setShowMenu(false);
-              }}
-              className="w-full px-3 py-2 text-sm text-left text-red-600 hover:bg-red-50 flex items-center gap-2"
-            >
-              <Trash2 size={14} />
-              Delete
-            </button>
-          </div>
-        )}
       </div>
 
+      {/* Dropdown Menu */}
+      {showMenu && (
+        <div 
+          ref={menuRef}
+          className="absolute right-0 top-10 -mr-2 w-56 bg-[#1e1e24] rounded-xl shadow-[0_10px_40px_-10px_rgba(0,0,0,0.5)] border border-[#2a2a2e] z-50 overflow-hidden p-2"
+        >
+          <button
+            onClick={() => {
+              duplicateNode(id);
+              setShowMenu(false);
+            }}
+            className="w-full px-3 py-2.5 text-sm text-left text-white hover:bg-[#2a2a2e] rounded-md flex items-center justify-between transition-colors group"
+          >
+            <span>Duplicate</span>
+            <span className="text-gray-500 text-xs italic group-hover:text-gray-400">ctrl+d</span>
+          </button>
+
+          <button className="w-full px-3 py-2.5 text-sm text-left text-white hover:bg-[#2a2a2e] rounded-md flex items-center justify-between transition-colors">
+            <span>Rename</span>
+          </button>
+          
+          <button className="w-full px-3 py-2.5 text-sm text-left text-white hover:bg-[#2a2a2e] rounded-md flex items-center justify-between transition-colors">
+            <span>Lock</span>
+          </button>
+
+          <div className="h-px bg-[#2a2a2e] my-2" />
+
+          <button
+            onClick={() => {
+              deleteNode(id);
+              setShowMenu(false);
+            }}
+            className="w-full px-3 py-2.5 text-sm text-left text-white hover:bg-[#2a2a2e] rounded-md flex items-center justify-between transition-colors group"
+          >
+            <span>Delete</span>
+            <span className="text-gray-500 text-xs italic group-hover:text-gray-400">delete / backspace</span>
+          </button>
+        </div>
+      )}
+
       {/* Content */}
-      <div className="px-4 pb-4">
-        <textarea
-          value={data.text || ''}
-          onChange={handleTextChange}
-          placeholder="Enter text content..."
-          className="
-            w-full min-h-[100px] max-h-[200px]
-            p-0 text-sm
-            bg-transparent
-            border-none
-            focus:outline-none focus:ring-0
-            text-slate-700
-            placeholder-slate-400
-            resize-none
-            leading-relaxed
-            light-scrollbar
-          "
-        />
+      <div className="px-4 pb-5">
+        <div className="bg-[#2b2b30] rounded-xl p-4 border border-[#3a3a3e]">
+          <textarea
+            value={data.text || ''}
+            onChange={handleTextChange}
+            placeholder="Enter your prompt here..."
+            className="
+              w-full min-h-[120px] max-h-[300px]
+              p-0 text-sm
+              bg-transparent
+              border-none
+              focus:outline-none focus:ring-0
+              text-gray-100
+              placeholder-gray-500
+              resize-none
+              leading-relaxed
+            "
+          />
+        </div>
       </div>
 
       {/* Handles */}
@@ -124,13 +138,13 @@ const TextNode = ({ id, data, selected }: NodeProps<TextNodeData>) => {
         type="source"
         position={Position.Right}
         id="source"
-        className="!w-3 !h-3 !bg-[#7c3aed] !border-2 !border-[#1a1a1e]"
+        className="!w-4 !h-4 !bg-[#1e1e24] !border-[4px] !border-[#e879f9] !rounded-full !-right-2.5 ring-2 ring-[#1e1e24]"
       />
       <Handle
         type="target"
         position={Position.Left}
         id="target"
-        className="!w-3 !h-3 !bg-[#7c3aed] !border-2 !border-[#1a1a1e]"
+        className="!w-4 !h-4 !bg-[#1e1e24] !border-[4px] !border-[#e879f9] !rounded-full !-left-2.5 ring-2 ring-[#1e1e24]"
       />
     </div>
   );

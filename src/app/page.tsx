@@ -1,7 +1,6 @@
 'use client';
 import { useCallback, useEffect } from 'react';
 import ReactFlow, {
-  Controls,
   Background,
   BackgroundVariant,
   ReactFlowProvider,
@@ -20,10 +19,16 @@ import { defaultNodes, defaultEdges } from '@/lib/defaultWorkflow';
 
 import 'reactflow/dist/style.css';
 
+import CustomEdge from '@/components/edges/CustomEdge';
+
 const nodeTypes = {
   textNode: TextNode,
   imageNode: ImageNode,
   llmNode: LLMNode,
+};
+
+const edgeTypes = {
+  customEdge: CustomEdge,
 };
 
 const defaultEdgeOptions = {
@@ -83,24 +88,23 @@ function Flow() {
   );
   
   return (
-    <div className="flex flex-col w-full h-screen overflow-hidden bg-[#1a1a1e]">
-      {/* Header */}
-      <Header />
+    <div className="flex w-full h-screen overflow-hidden bg-[#1a1a1e]">
+      {/* Sidebar */}
+      <Sidebar />
       
-      {/* Main Content */}
-      <div className="flex flex-1 overflow-hidden">
-        {/* Sidebar */}
-        <Sidebar />
+      {/* Main Content - Canvas Area */}
+      <div className="flex-1 h-full relative">
+        {/* Floating Header Controls */}
+        <Header />
         
-        {/* Canvas */}
-        <div className="flex-1 h-full relative">
-          <ReactFlow
-            nodes={nodes}
-            edges={edges}
+        <ReactFlow
+          nodes={nodes}
+          edges={edges}
             onNodesChange={onNodesChange}
             onEdgesChange={onEdgesChange}
             onConnect={onConnect}
             nodeTypes={nodeTypes}
+            edgeTypes={edgeTypes}
             defaultEdgeOptions={defaultEdgeOptions}
             connectionLineType={ConnectionLineType.SmoothStep}
             connectionLineStyle={{ stroke: '#7c3aed', strokeWidth: 2 }}
@@ -118,52 +122,49 @@ function Flow() {
               size={1} 
               color="#3a3a3e"
             />
-            <Controls 
-              className="!bg-[#2a2a2e] !border-[#3a3a3e] !rounded-lg !shadow-lg"
-              showInteractive={false}
-            />
+
           </ReactFlow>
           
           {/* Bottom Toolbar */}
-          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 px-3 py-2 bg-[#2a2a2e] border border-[#3a3a3e] rounded-lg shadow-lg">
+          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-1.5 px-2 py-2 bg-[#1a1a1e]/90 backdrop-blur-md border border-[#2a2a2e] rounded-2xl shadow-2xl z-50">
             <button 
               onClick={() => fitView()}
-              className="w-8 h-8 flex items-center justify-center rounded-md bg-[#7c3aed] text-white hover:bg-[#6d28d9] transition-colors"
+              className="w-9 h-9 flex items-center justify-center rounded-xl bg-violet-600 text-white hover:bg-violet-500 hover:shadow-lg hover:shadow-violet-500/20 transition-all active:scale-95"
               title="Fit View"
             >
-              <Maximize size={16} />
+              <Maximize size={18} />
             </button>
+            <div className="w-px h-6 bg-[#2a2a2e] mx-1" />
             <button 
               onClick={() => zoomIn()}
-              className="w-8 h-8 flex items-center justify-center rounded-md text-gray-400 hover:text-gray-200 hover:bg-[#3a3a3e] transition-colors"
+              className="w-9 h-9 flex items-center justify-center rounded-xl text-gray-400 hover:text-white hover:bg-[#3a3a3e] transition-all active:scale-95"
               title="Zoom In"
             >
-              <ZoomIn size={16} />
+              <ZoomIn size={18} />
             </button>
             <button 
               onClick={() => zoomOut()}
-              className="w-8 h-8 flex items-center justify-center rounded-md text-gray-400 hover:text-gray-200 hover:bg-[#3a3a3e] transition-colors"
+              className="w-9 h-9 flex items-center justify-center rounded-xl text-gray-400 hover:text-white hover:bg-[#3a3a3e] transition-all active:scale-95"
               title="Zoom Out"
             >
-              <ZoomOut size={16} />
+              <ZoomOut size={18} />
             </button>
-            <div className="w-px h-5 bg-[#3a3a3e]" />
+            <div className="w-px h-6 bg-[#2a2a2e] mx-1" />
             <button 
               onClick={undo}
-              className="w-8 h-8 flex items-center justify-center rounded-md text-gray-400 hover:text-gray-200 hover:bg-[#3a3a3e] transition-colors"
+              className="w-9 h-9 flex items-center justify-center rounded-xl text-gray-400 hover:text-white hover:bg-[#3a3a3e] transition-all active:scale-95"
               title="Undo"
             >
-              <Undo size={16} />
+              <Undo size={18} />
             </button>
             <button 
               onClick={redo}
-              className="w-8 h-8 flex items-center justify-center rounded-md text-gray-400 hover:text-gray-200 hover:bg-[#3a3a3e] transition-colors"
+              className="w-9 h-9 flex items-center justify-center rounded-xl text-gray-400 hover:text-white hover:bg-[#3a3a3e] transition-all active:scale-95"
               title="Redo"
             >
-              <Redo size={16} />
+              <Redo size={18} />
             </button>
           </div>
-        </div>
       </div>
     </div>
   );

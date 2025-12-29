@@ -1,7 +1,7 @@
 'use client';
 import { memo, useCallback, useRef, useState, useEffect } from 'react';
 import { Handle, Position, NodeProps } from 'reactflow';
-import { Upload, MoreHorizontal, Copy, Trash2 } from 'lucide-react';
+import { Upload, MoreVertical, Copy, Trash2, MoreHorizontal } from 'lucide-react';
 import useStore from '@/store/useStore';
 import { ImageNodeData } from '@/types/workflow';
 
@@ -70,22 +70,22 @@ const ImageNode = ({ id, data, selected }: NodeProps<ImageNodeData>) => {
     <div
       className={`
         min-w-[200px] max-w-[240px] 
-        bg-[#f5f0e6] 
+        bg-[#2a2a2e]
         rounded-xl shadow-lg
         border transition-all duration-200
         ${selected 
           ? 'border-[#7c3aed] shadow-[#7c3aed]/20 shadow-xl' 
-          : 'border-[#e8e0d0] hover:border-[#7c3aed]/50'
+          : 'border-white/10 hover:border-[#7c3aed]/50'
         }
       `}
     >
       {/* Header */}
-      <div className="px-4 py-3 flex items-center justify-between border-b border-[#e8e0d0] relative">
+      <div className="px-4 py-3 flex items-center gap-2 border-b border-white/10 relative">
         <input
           type="text"
           value={data.label || 'Image'}
           onChange={handleLabelChange}
-          className="text-sm font-medium bg-transparent border-none outline-none text-gray-700 placeholder-gray-400 flex-1"
+          className="text-sm font-bold bg-transparent border-none outline-none text-white placeholder-gray-400 flex-1 min-w-0"
           placeholder="Image"
         />
         <button 

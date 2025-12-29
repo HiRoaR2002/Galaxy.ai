@@ -5,6 +5,11 @@
       --tw-translate-x: 0;
       --tw-translate-y: 0;
       --tw-translate-z: 0;
+      --tw-rotate-x: initial;
+      --tw-rotate-y: initial;
+      --tw-rotate-z: initial;
+      --tw-skew-x: initial;
+      --tw-skew-y: initial;
       --tw-border-style: solid;
       --tw-gradient-position: initial;
       --tw-gradient-from: #0000;
@@ -15,6 +20,7 @@
       --tw-gradient-from-position: 0%;
       --tw-gradient-via-position: 50%;
       --tw-gradient-to-position: 100%;
+      --tw-leading: initial;
       --tw-shadow: 0 0 #0000;
       --tw-shadow-color: initial;
       --tw-shadow-alpha: 100%;
@@ -50,6 +56,10 @@
   }
 }
 
+.invisible {
+  visibility: hidden;
+}
+
 .absolute {
   position: absolute;
 }
@@ -58,12 +68,20 @@
   position: relative;
 }
 
+.top-1\/2 {
+  top: 50%;
+}
+
 .top-full {
   top: 100%;
 }
 
 .left-1\/2 {
   left: 50%;
+}
+
+.left-full {
+  left: 100%;
 }
 
 .z-10 {
@@ -110,8 +128,32 @@
   max-height: 200px;
 }
 
+.max-h-\[240px\] {
+  max-height: 240px;
+}
+
+.max-h-\[300px\] {
+  max-height: 300px;
+}
+
 .min-h-\[100px\] {
   min-height: 100px;
+}
+
+.min-h-\[120px\] {
+  min-height: 120px;
+}
+
+.w-\[240px\] {
+  width: 240px;
+}
+
+.w-\[280px\] {
+  width: 280px;
+}
+
+.w-\[320px\] {
+  width: 320px;
 }
 
 .w-full {
@@ -159,6 +201,10 @@
   rotate: 180deg;
 }
 
+.transform {
+  transform: var(--tw-rotate-x, ) var(--tw-rotate-y, ) var(--tw-rotate-z, ) var(--tw-skew-x, ) var(--tw-skew-y, );
+}
+
 .cursor-grab {
   cursor: grab;
 }
@@ -169,6 +215,10 @@
 
 .resize-none {
   resize: none;
+}
+
+.resize-y {
+  resize: vertical;
 }
 
 .flex-col {
@@ -208,6 +258,11 @@
   border-width: 2px !important;
 }
 
+.\!border-\[3px\] {
+  border-style: var(--tw-border-style) !important;
+  border-width: 3px !important;
+}
+
 .border {
   border-style: var(--tw-border-style);
   border-width: 1px;
@@ -216,6 +271,11 @@
 .border-2 {
   border-style: var(--tw-border-style);
   border-width: 2px;
+}
+
+.border-4 {
+  border-style: var(--tw-border-style);
+  border-width: 4px;
 }
 
 .border-r {
@@ -270,6 +330,10 @@
   border-color: #f0ebe0;
 }
 
+.border-transparent {
+  border-color: #0000;
+}
+
 .\!bg-\[\#2a2a2e\] {
   background-color: #2a2a2e !important;
 }
@@ -316,9 +380,19 @@
   background-image: linear-gradient(var(--tw-gradient-stops));
 }
 
+.bg-gradient-to-r {
+  --tw-gradient-position: to right in oklab;
+  background-image: linear-gradient(var(--tw-gradient-stops));
+}
+
 .to-\[\#fdfbf7\] {
   --tw-gradient-to: #fdfbf7;
   --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
+}
+
+.bg-clip-text {
+  -webkit-background-clip: text;
+  background-clip: text;
 }
 
 .object-contain {
@@ -329,12 +403,37 @@
   text-align: left;
 }
 
+.text-\[11px\] {
+  font-size: 11px;
+}
+
 .text-\[13px\] {
   font-size: 13px;
 }
 
+.leading-none {
+  --tw-leading: 1;
+  line-height: 1;
+}
+
+.whitespace-nowrap {
+  white-space: nowrap;
+}
+
+.whitespace-pre-wrap {
+  white-space: pre-wrap;
+}
+
 .text-\[\#7c3aed\] {
   color: #7c3aed;
+}
+
+.text-\[\#111\] {
+  color: #111;
+}
+
+.text-transparent {
+  color: #0000;
 }
 
 .uppercase {
@@ -357,6 +456,16 @@
 @supports (color: color-mix(in lab, red, red)) {
   .shadow-\[\#7c3aed\]\/20 {
     --tw-shadow-color: color-mix(in oklab, lab(42.2333% 56.9752 -80.606 / .2) var(--tw-shadow-alpha), transparent);
+  }
+}
+
+.shadow-transparent {
+  --tw-shadow-color: transparent;
+}
+
+@supports (color: color-mix(in lab, red, red)) {
+  .shadow-transparent {
+    --tw-shadow-color: color-mix(in oklab, transparent var(--tw-shadow-alpha), transparent);
   }
 }
 
@@ -408,9 +517,26 @@
   transition-duration: .3s;
 }
 
+.duration-500 {
+  --tw-duration: .5s;
+  transition-duration: .5s;
+}
+
 .outline-none {
   --tw-outline-style: none;
   outline-style: none;
+}
+
+@media (hover: hover) {
+  .group-hover\:visible:is(:where(.group):hover *) {
+    visibility: visible;
+  }
+}
+
+@media (hover: hover) {
+  .group-hover\:stroke-\[2\]:is(:where(.group):hover *) {
+    stroke-width: 2px;
+  }
 }
 
 @media (hover: hover) {
@@ -430,6 +556,24 @@
     --tw-scale-x: 105%;
     --tw-scale-y: 105%;
     --tw-scale-z: 105%;
+    scale: var(--tw-scale-x) var(--tw-scale-y);
+  }
+}
+
+@media (hover: hover) {
+  .hover\:scale-110:hover {
+    --tw-scale-x: 110%;
+    --tw-scale-y: 110%;
+    --tw-scale-z: 110%;
+    scale: var(--tw-scale-x) var(--tw-scale-y);
+  }
+}
+
+@media (hover: hover) {
+  .hover\:scale-125:hover {
+    --tw-scale-x: 125%;
+    --tw-scale-y: 125%;
+    --tw-scale-z: 125%;
     scale: var(--tw-scale-x) var(--tw-scale-y);
   }
 }
@@ -488,6 +632,17 @@
   outline-style: none;
 }
 
+.active\:scale-95:active {
+  --tw-scale-x: 95%;
+  --tw-scale-y: 95%;
+  --tw-scale-z: 95%;
+  scale: var(--tw-scale-x) var(--tw-scale-y);
+}
+
+.active\:scale-\[0\.98\]:active {
+  scale: .98;
+}
+
 .active\:cursor-grabbing:active {
   cursor: grabbing;
 }
@@ -498,6 +653,10 @@
 
 .disabled\:opacity-50:disabled {
   opacity: .5;
+}
+
+.disabled\:opacity-70:disabled {
+  opacity: .7;
 }
 
 .react-flow {
@@ -1065,6 +1224,31 @@ body {
   initial-value: 0;
 }
 
+@property --tw-rotate-x {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-rotate-y {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-rotate-z {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-skew-x {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-skew-y {
+  syntax: "*";
+  inherits: false
+}
+
 @property --tw-border-style {
   syntax: "*";
   inherits: false;
@@ -1120,6 +1304,11 @@ body {
   syntax: "<length-percentage>";
   inherits: false;
   initial-value: 100%;
+}
+
+@property --tw-leading {
+  syntax: "*";
+  inherits: false
 }
 
 @property --tw-shadow {

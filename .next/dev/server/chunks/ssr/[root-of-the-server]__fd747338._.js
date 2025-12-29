@@ -109,6 +109,12 @@ const useStore = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_module
                 edges: edges.filter((e)=>e.source !== id && e.target !== id)
             });
         },
+        deleteEdge: (id)=>{
+            get().takeSnapshot();
+            set({
+                edges: get().edges.filter((e)=>e.id !== id)
+            });
+        },
         takeSnapshot: ()=>{
             const { nodes, edges, history } = get();
             // Limit history size to 50

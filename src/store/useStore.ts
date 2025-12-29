@@ -31,6 +31,8 @@ interface WorkflowState {
   updateNodeData: (id: string, data: Partial<NodeData>) => void;
   duplicateNode: (id: string) => void;
   deleteNode: (id: string) => void;
+  deleteEdge: (id: string) => void;
+  clearCanvas: () => void;
   
   // Undo/Redo - Simple implementation
   history: {
@@ -69,7 +71,7 @@ const useStore = create<WorkflowState>((set, get) => ({
   onConnect: (connection: Connection) => {
     get().takeSnapshot();
     set({
-      edges: addEdge({ ...connection, animated: true, type: 'smoothstep', style: { stroke: '#7c3aed', strokeWidth: 2 } }, get().edges),
+      edges: addEdge({ ...connection, animated: true, type: 'customEdge', style: { stroke: '#7c3aed', strokeWidth: 2 } }, get().edges),
     });
   },
 
@@ -116,6 +118,21 @@ const useStore = create<WorkflowState>((set, get) => ({
     set({
       nodes: nodes.filter((n) => n.id !== id),
       edges: edges.filter((e) => e.source !== id && e.target !== id),
+    });
+  },
+
+  deleteEdge: (id: string) => {
+    get().takeSnapshot();
+    set({
+      edges: get().edges.filter((e) => e.id !== id),
+    });
+  },
+
+  clearCanvas: () => {
+    get().takeSnapshot();
+    set({
+      nodes: [],
+      edges: [],
     });
   },
 
