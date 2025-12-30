@@ -1,6 +1,6 @@
 'use client';
 import React, { useState } from 'react';
-import { Save, FolderOpen, Trash2 } from 'lucide-react';
+import { Save, FolderOpen, Trash2, CloudUpload, CloudDownload } from 'lucide-react';
 import useStore from '@/store/useStore';
 
 interface HeaderProps {
@@ -43,6 +43,56 @@ const Header = ({ title = 'untitled' }: HeaderProps) => {
     };
     reader.readAsText(file);
     e.target.value = '';
+  };
+  
+    const handleCloudSave = async () => {
+    try {
+      const flow = { nodes, edges };
+      const response = await fetch('/api/workflows', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: workflowTitle,
+          nodes,
+          edges,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        alert('Workflow saved to cloud successfully!');
+      } else {
+        alert(`Failed to save: ${data.error}`);
+      }
+    } catch (error) {
+      console.error('Cloud Save Error:', error);
+      alert('An error occurred while saving to cloud.');
+    }
+  };
+
+  const handleCloudLoad = async () => {
+    try {
+      const response = await fetch('/api/workflows');
+      const data = await response.json();
+
+      if (response.ok && data.workflows && data.workflows.length > 0) {
+        // For simplicity, just load the latest one for now or show a prompt
+        // Ideally show a modal list, but we'll default to latest for this iteration
+        const latest = data.workflows[0];
+        if (confirm(`Load latest workflow: "${latest.name}"? This will overwrite current canvas.`)) {
+             loadWorkflow({ nodes: latest.nodes, edges: latest.edges });
+             setWorkflowTitle(latest.name);
+        }
+      } else {
+        alert('No workflows found in cloud.');
+      }
+    } catch (error) {
+      console.error('Cloud Load Error:', error);
+      alert('Failed to fetch workflows.');
+    }
   };
 
   return (
@@ -92,13 +142,28 @@ const Header = ({ title = 'untitled' }: HeaderProps) => {
               />
             </label>
 
-            {/* Save Button */}
             <button 
               onClick={handleSave}
               className="flex items-center justify-center p-2.5 bg-[#1a1a1e]/80 rounded-xl text-white hover:bg-white/10 transition-all cursor-pointer active:scale-95 hover:text-gray-200"
-              title="Save Workflow"
+              title="Export JSON"
             >
               <Save size={18} />
+            </button>
+            <div className="w-px h-6 bg-white/5 mx-1" />
+             {/* DB Save/Load */}
+             <button
+               onClick={handleCloudSave}
+               className="flex items-center justify-center p-2.5 bg-[#1a1a1e]/80 rounded-xl text-blue-400 hover:bg-blue-500/10 hover:text-blue-300 transition-all cursor-pointer active:scale-95 group"
+               title="Save to Cloud"
+            >
+              <CloudUpload size={18} />
+            </button>
+             <button
+               onClick={handleCloudLoad}
+               className="flex items-center justify-center p-2.5 bg-[#1a1a1e]/80 rounded-xl text-blue-400 hover:bg-blue-500/10 hover:text-blue-300 transition-all cursor-pointer active:scale-95 group relative"
+               title="Load from Cloud"
+            >
+              <CloudDownload size={18} />
             </button>
           </div>
         </div>

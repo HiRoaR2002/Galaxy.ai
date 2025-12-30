@@ -187,7 +187,6 @@ const useStore = create<WorkflowState>((set, get) => ({
       const workflow = { nodes, edges };
       localStorage.setItem('galaxy-workflow', JSON.stringify(workflow));
       // In a real app, this would POST to DB
-      console.log('Saved to local storage');
   },
   
   loadWorkflow: (workflow) => {

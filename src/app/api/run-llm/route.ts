@@ -62,10 +62,13 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ text });
 
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Gemini API Error:", error);
+    
+    const errorMessage = error instanceof Error ? error.message : "An error occurred during generation";
+    
     return NextResponse.json(
-      { error: error.message || "An error occurred during generation" },
+      { error: errorMessage },
       { status: 500 }
     );
   }
