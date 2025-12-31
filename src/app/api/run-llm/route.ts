@@ -3,7 +3,7 @@ import { z } from "zod";
 import { GoogleGenerativeAI, Part } from "@google/generative-ai";
 
 const RequestSchema = z.object({
-  model: z.enum(["gemini-1.5-flash", "gemini-1.5-pro", "gemini-2.5-flash"]),
+  model: z.enum(["gemini-2.5-flash"]),
   systemPrompt: z.string().optional(),
   userMessage: z.string(),
   images: z.array(z.string()).optional(), // Expecting base64 data URLs

@@ -122,15 +122,13 @@ const LLMNode = ({ id, data, selected }: NodeProps<LLMNodeData>) => {
   }, [id, data.model, updateNodeData, getEdges, getNode]);
 
   const models: { value: GeminiModel; label: string }[] = [
-    { value: 'gemini-1.5-flash', label: 'Gemini 1.5 Flash' },
-    { value: 'gemini-1.5-pro', label: 'Gemini 1.5 Pro' },
     { value: 'gemini-2.5-flash', label: 'Gemini 2.5 Flash' },
   ];
 
   return (
     <div
       className={`
-        relative
+        relative group
         min-w-[320px] max-w-[400px] 
         bg-[#1e1e24] 
         rounded-2xl shadow-2xl
@@ -291,27 +289,66 @@ const LLMNode = ({ id, data, selected }: NodeProps<LLMNodeData>) => {
         id="system"
         style={{ top: '30%' }}
         className="!w-4 !h-4 !bg-[#1e1e24] !border-[4px] !border-[#e879f9] !rounded-full !-left-2.5 ring-2 ring-[#1e1e24]"
-      />
+        isValidConnection={(connection) => {
+          const nodes = useStore.getState().nodes;
+          const sourceNode = nodes.find((n) => n.id === connection.source);
+          if (!sourceNode) return false;
+          // System prompt only accepts text
+          return sourceNode.type === 'textNode' || sourceNode.type === 'llmNode';
+        }}
+      >
+        <div className="absolute right-full top-1/2 -translate-y-1/2 mr-2 text-[10px] text-gray-400 font-medium whitespace-nowrap pointer-events-none">
+          System Prompt
+        </div>
+      </Handle>
+      
       <Handle
         type="target"
         position={Position.Left}
         id="user"
         style={{ top: '50%' }}
         className="!w-4 !h-4 !bg-[#1e1e24] !border-[4px] !border-[#e879f9] !rounded-full !-left-2.5 ring-2 ring-[#1e1e24]"
-      />
+        isValidConnection={(connection) => {
+          const nodes = useStore.getState().nodes;
+          const sourceNode = nodes.find((n) => n.id === connection.source);
+          if (!sourceNode) return false;
+          // User prompt accepts text and llm output
+          return sourceNode.type === 'textNode' || sourceNode.type === 'llmNode';
+        }}
+      >
+        <div className="absolute right-full top-1/2 -translate-y-1/2 mr-2 text-[10px] text-gray-400 font-medium whitespace-nowrap pointer-events-none">
+          Prompt
+        </div>
+      </Handle>
+
       <Handle
         type="target"
         position={Position.Left}
         id="images"
         style={{ top: '70%' }}
         className="!w-4 !h-4 !bg-[#1e1e24] !border-[4px] !border-[#e879f9] !rounded-full !-left-2.5 ring-2 ring-[#1e1e24]"
-      />
+        isValidConnection={(connection) => {
+          const nodes = useStore.getState().nodes;
+          const sourceNode = nodes.find((n) => n.id === connection.source);
+          if (!sourceNode) return false;
+          // Only accept images
+          return sourceNode.type === 'imageNode';
+        }}
+      >
+        <div className="absolute right-full top-1/2 -translate-y-1/2 mr-2 text-[10px] text-gray-400 font-medium whitespace-nowrap pointer-events-none">
+          Image
+        </div>
+      </Handle>
       <Handle
         type="source"
         position={Position.Right}
         id="source"
         className="!w-4 !h-4 !bg-[#1e1e24] !border-[4px] !border-[#e879f9] !rounded-full !-right-2.5 ring-2 ring-[#1e1e24]"
-      />
+      >
+        <div className="absolute left-full top-1/2 -translate-y-1/2 ml-2 text-[10px] text-gray-400 font-medium whitespace-nowrap pointer-events-none">
+          Output
+        </div>
+      </Handle>
     </div>
   );
 };

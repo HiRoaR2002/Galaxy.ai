@@ -69,6 +69,7 @@ const ImageNode = ({ id, data, selected }: NodeProps<ImageNodeData>) => {
   return (
     <div
       className={`
+        relative group
         min-w-[200px] max-w-[240px] 
         bg-[#2a2a2e]
         rounded-xl shadow-lg
@@ -178,13 +179,11 @@ const ImageNode = ({ id, data, selected }: NodeProps<ImageNodeData>) => {
         position={Position.Right}
         id="source"
         className="!w-3 !h-3 !bg-[#7c3aed] !border-2 !border-[#1a1a1e]"
-      />
-      <Handle
-        type="target"
-        position={Position.Left}
-        id="target"
-        className="!w-3 !h-3 !bg-[#7c3aed] !border-2 !border-[#1a1a1e]"
-      />
+      >
+        <div className="absolute left-full top-1/2 -translate-y-1/2 ml-2 text-[10px] text-gray-400 font-medium whitespace-nowrap pointer-events-none">
+          Image Output
+        </div>
+      </Handle>
     </div>
   );
 };

@@ -14,7 +14,7 @@ export const defaultNodes: AppNode[] = [
   { id: 'prod', type: 'textNode', position: { x: 400, y: 350 }, data: { label: 'Product Details', text: 'Product: Noise Cancelling Headphones. Features: 30h battery, active noise cancellation, deep bass.' } },
   
   // Analyzer LLM
-  { id: 'analyze', type: 'llmNode', position: { x: 800, y: 200 }, data: { label: 'Analyze Product', model: 'gemini-1.5-flash' } },
+  { id: 'analyze', type: 'llmNode', position: { x: 800, y: 200 }, data: { label: 'Analyze Product', model: 'gemini-2.5-flash' } },
   
   // Instructions for Branches
   { id: 'inst1', type: 'textNode', position: { x: 900, y: -100 }, data: { label: 'Amazon Prompt', text: 'Write a professional Amazon listing based on the product analysis.' } },
@@ -22,9 +22,9 @@ export const defaultNodes: AppNode[] = [
   { id: 'inst3', type: 'textNode', position: { x: 900, y: 550 }, data: { label: 'SEO Prompt', text: 'Write a concise SEO meta description.' } },
   
   // Output Generators
-  { id: 'amazon', type: 'llmNode', position: { x: 1200, y: 0 }, data: { label: 'Write Amazon Listing', model: 'gemini-1.5-flash' } },
-  { id: 'insta', type: 'llmNode', position: { x: 1200, y: 300 }, data: { label: 'Write Instagram Caption', model: 'gemini-1.5-flash' } },
-  { id: 'seo', type: 'llmNode', position: { x: 1200, y: 600 }, data: { label: 'Write SEO Description', model: 'gemini-1.5-flash' } },
+  { id: 'amazon', type: 'llmNode', position: { x: 1200, y: 0 }, data: { label: 'Write Amazon Listing', model: 'gemini-2.5-flash' } },
+  { id: 'insta', type: 'llmNode', position: { x: 1200, y: 300 }, data: { label: 'Write Instagram Caption', model: 'gemini-2.5-flash' } },
+  { id: 'seo', type: 'llmNode', position: { x: 1200, y: 600 }, data: { label: 'Write SEO Description', model: 'gemini-2.5-flash' } },
   
   // Final Outputs
   { id: 'out1', type: 'textNode', position: { x: 1600, y: 0 }, data: { label: 'Amazon Output', text: '' } },

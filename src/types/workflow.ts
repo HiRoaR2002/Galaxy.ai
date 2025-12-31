@@ -1,4 +1,4 @@
-export type GeminiModel = "gemini-1.5-flash" | "gemini-1.5-pro" | "gemini-2.5-flash";
+export type GeminiModel = "gemini-2.5-flash";
 
 export interface TextNodeData {
   label?: string;

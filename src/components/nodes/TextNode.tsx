@@ -41,7 +41,7 @@ const TextNode = ({ id, data, selected }: NodeProps<TextNodeData>) => {
   return (
     <div
       className={`
-        relative
+        relative group
         min-w-[320px] max-w-[400px] 
         bg-[#1e1e24] 
         rounded-2xl shadow-2xl
@@ -139,13 +139,11 @@ const TextNode = ({ id, data, selected }: NodeProps<TextNodeData>) => {
         position={Position.Right}
         id="source"
         className="!w-4 !h-4 !bg-[#1e1e24] !border-[4px] !border-[#e879f9] !rounded-full !-right-2.5 ring-2 ring-[#1e1e24]"
-      />
-      <Handle
-        type="target"
-        position={Position.Left}
-        id="target"
-        className="!w-4 !h-4 !bg-[#1e1e24] !border-[4px] !border-[#e879f9] !rounded-full !-left-2.5 ring-2 ring-[#1e1e24]"
-      />
+      >
+        <div className="absolute left-full top-1/2 -translate-y-1/2 ml-2 text-[10px] text-gray-400 font-medium whitespace-nowrap pointer-events-none">
+          Text Output
+        </div>
+      </Handle>
     </div>
   );
 };
