@@ -179,6 +179,7 @@ const ImageNode = ({ id, data, selected }: NodeProps<ImageNodeData>) => {
         position={Position.Right}
         id="source"
         className="!w-3 !h-3 !bg-[#7c3aed] !border-2 !border-[#1a1a1e]"
+        isValidConnection={(connection) => connection.targetHandle === 'images'}
       >
         <div className="absolute left-full top-1/2 -translate-y-1/2 ml-2 text-[10px] text-gray-400 font-medium whitespace-nowrap pointer-events-none">
           Image Output

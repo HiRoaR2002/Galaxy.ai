@@ -14,6 +14,7 @@ import {
   ReactFlowInstance,
 } from 'reactflow';
 import { TextNodeData, ImageNodeData, LLMNodeData } from '@/types/workflow';
+import { hasCycle } from '@/lib/flowUtils';
 
 type NodeData = TextNodeData | ImageNodeData | LLMNodeData;
 
@@ -69,6 +70,14 @@ const useStore = create<WorkflowState>((set, get) => ({
   },
 
   onConnect: (connection: Connection) => {
+    if (!connection.source || !connection.target) return;
+    
+    // Explicit cycle detection check before adding edge
+    if (hasCycle(connection.source, connection.target, get().edges)) {
+      console.warn('Connection rejected: Cycle detected');
+      return; 
+    }
+
     get().takeSnapshot();
     set({
       edges: addEdge({ ...connection, animated: true, type: 'customEdge', style: { stroke: '#7c3aed', strokeWidth: 2 } }, get().edges),

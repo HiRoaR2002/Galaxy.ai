@@ -4,6 +4,7 @@ import { Handle, Position, NodeProps, useReactFlow } from 'reactflow';
 import { MoreHorizontal, Play, Loader2, AlertCircle, Sparkles, ChevronDown, Copy, Trash2, BrainCircuit } from 'lucide-react';
 import useStore from '@/store/useStore';
 import { LLMNodeData, GeminiModel, TextNodeData, ImageNodeData } from '@/types/workflow';
+import { hasCycle } from '@/lib/flowUtils';
 
 const LLMNode = ({ id, data, selected }: NodeProps<LLMNodeData>) => {
   const updateNodeData = useStore((state) => state.updateNodeData);
@@ -291,8 +292,13 @@ const LLMNode = ({ id, data, selected }: NodeProps<LLMNodeData>) => {
         className="!w-4 !h-4 !bg-[#1e1e24] !border-[4px] !border-[#e879f9] !rounded-full !-left-2.5 ring-2 ring-[#1e1e24]"
         isValidConnection={(connection) => {
           const nodes = useStore.getState().nodes;
+          const edges = useStore.getState().edges;
           const sourceNode = nodes.find((n) => n.id === connection.source);
-          if (!sourceNode) return false;
+          if (!sourceNode || !connection.source || !connection.target) return false;
+          
+          // Check for cycles
+          if (hasCycle(connection.source, connection.target, edges)) return false;
+
           // System prompt only accepts text
           return sourceNode.type === 'textNode' || sourceNode.type === 'llmNode';
         }}
@@ -310,8 +316,13 @@ const LLMNode = ({ id, data, selected }: NodeProps<LLMNodeData>) => {
         className="!w-4 !h-4 !bg-[#1e1e24] !border-[4px] !border-[#e879f9] !rounded-full !-left-2.5 ring-2 ring-[#1e1e24]"
         isValidConnection={(connection) => {
           const nodes = useStore.getState().nodes;
+          const edges = useStore.getState().edges;
           const sourceNode = nodes.find((n) => n.id === connection.source);
-          if (!sourceNode) return false;
+          if (!sourceNode || !connection.source || !connection.target) return false;
+
+          // Check for cycles
+          if (hasCycle(connection.source, connection.target, edges)) return false;
+
           // User prompt accepts text and llm output
           return sourceNode.type === 'textNode' || sourceNode.type === 'llmNode';
         }}
@@ -329,8 +340,13 @@ const LLMNode = ({ id, data, selected }: NodeProps<LLMNodeData>) => {
         className="!w-4 !h-4 !bg-[#1e1e24] !border-[4px] !border-[#e879f9] !rounded-full !-left-2.5 ring-2 ring-[#1e1e24]"
         isValidConnection={(connection) => {
           const nodes = useStore.getState().nodes;
+          const edges = useStore.getState().edges;
           const sourceNode = nodes.find((n) => n.id === connection.source);
-          if (!sourceNode) return false;
+          if (!sourceNode || !connection.source || !connection.target) return false;
+          
+          // Check for cycles
+          if (hasCycle(connection.source, connection.target, edges)) return false;
+
           // Only accept images
           return sourceNode.type === 'imageNode';
         }}
